@@ -23,12 +23,15 @@ Route::get('/', function () {
 Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('users')->group(function () {
-        Route::get('/', [UserController::class, 'index']);
+    Route::name('users.')->prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
     });
 
-    Route::prefix('categories')->group(function () {
-        Route::get('/', [CategoryController::class, 'index']);
+    Route::name('categories.')->prefix('categories')->group(function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('index');
+        Route::get('/tree-view', [CategoryController::class, 'indexTree'])->name('indexTree');
+        Route::get('add', [CategoryController::class, 'create'])->name('create');
+        Route::post('store', [CategoryController::class, 'store'])->name('store');
     });
 
 });
