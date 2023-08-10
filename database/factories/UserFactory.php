@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Http\Common\AppEnumConstant;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,11 +17,13 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            User::FIRST_NAME => $this->faker->firstName(),
+            User::LAST_NAME => $this->faker->lastName(),
+            User::EMAIL => $this->faker->unique()->safeEmail(),
+            User::ROLE_TYPE => getAppEnumId(AppEnumConstant::ROLE_TYPE, AppEnumConstant::ROLE_TYPE_USER),
+            User::EMAIL_VERIFIED_AT => now(),
+            User::PASSWORD => bcrypt('password'),
+            User::REMEMBER_TOKEN => Str::random(10),
         ];
     }
 
