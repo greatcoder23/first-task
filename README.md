@@ -21,9 +21,7 @@ Task 1.
 
 ## Installation
 
-Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
-
-Install the dependencies and devDependencies and start the server.
+Install packages and dependencies via composer and run migration to create table schema also run seeders to get data
 
 ```sh
 composer install
@@ -31,11 +29,10 @@ php artisan migrate
 php aritsan db:seed
 ```
 
-Verify the deployment by navigating to your server address in
-your preferred browser.
+Start Laravel developement serve by using below command
 
 ```sh
-127.0.0.1:8000
+php artisan serve
 ```
 
 ## Test Credentials
