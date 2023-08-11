@@ -15,6 +15,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">Parent Category</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -24,6 +25,19 @@
                                 <th scope="row">{{ $cnt++ }}</th>
                                 <td>{{ $category->title }}</td>
                                 <td>{{ $category->parent_category_id_uuid ? $category->parentCategory->title  : '-' }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-outline-warning"
+                                       href="{{route('admin.categories.edit', ['id' => $category->id_uuid])}}">{{ __('Edit') }}</a>
+                                    <form class="d-inline" method="POST"
+                                          action="{{ route('admin.categories.destroy', ['id' => $category->id_uuid]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button
+                                            onclick="return confirm('Are you sure want to delete this record? If you delete this all child of will make as a parent')"
+                                            type="submit"
+                                            class="btn btn-sm btn-outline-danger">{{ __('Delete') }}</button>
+                                    </form>
+                                </td>
                             </tr>
                         @empty
                             <tr>

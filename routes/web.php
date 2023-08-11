@@ -30,8 +30,12 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
     Route::name('categories.')->prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
         Route::get('/tree-view', [CategoryController::class, 'indexTree'])->name('indexTree');
+
         Route::get('add', [CategoryController::class, 'create'])->name('create');
         Route::post('store', [CategoryController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::put('update/{id}', [CategoryController::class, 'update'])->name('update');
+        Route::delete('destroy/{id}', [CategoryController::class, 'destroy'])->name('destroy');
     });
 
 });
